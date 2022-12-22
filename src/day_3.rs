@@ -18,6 +18,20 @@ pub(crate) fn part_1() -> u32 {
     priority_score
 }
 
+pub(crate) fn part_2() -> u32 {
+    let mut priority_score = 0;
+    for lines in get_input().chunks(3) {
+        let common_letter = lines
+            .iter()
+            .map(|line| line.chars().collect())
+            .reduce(|set_1, set_2| &set_1 & &set_2)
+            .and_then(|common_set: HashSet<char>| common_set.iter().next().copied())
+            .expect("Should have 1 common element");
+        priority_score += priority(common_letter)
+    }
+    priority_score
+}
+
 fn priority(letter: char) -> u32 {
     match letter {
         'a'..='z' => (letter as u32) - ('a' as u32) + 1,
@@ -26,8 +40,9 @@ fn priority(letter: char) -> u32 {
     }
 }
 
-fn get_input() -> impl Iterator<Item = String> {
+fn get_input() -> Vec<String> {
     BufReader::new(File::open("inputs/day_3.txt").expect("Input file should be readable"))
         .lines()
         .map(|line| line.expect("Input should contain readable lines"))
+        .collect()
 }

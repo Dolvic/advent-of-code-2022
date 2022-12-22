@@ -8,4 +8,5 @@ fn main() {
     println!("Day 2, Part 1: {}", day_2::part_1());
     println!("Day 2, Part 2: {}", day_2::part_2());
     println!("Day 3, Part 1: {}", day_3::part_1());
+    println!("Day 3, Part 2: {}", day_3::part_2());
 }
